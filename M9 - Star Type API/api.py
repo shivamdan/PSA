@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from star_data import StarProperties, StarTypePrediction
 import uvicorn
 from predictor import load_model, make_predictions
 import numpy as np
@@ -11,9 +12,10 @@ model = load_model('model.pkl')
 def index_route():
     return {"Health":"Ok"}
 
-@app.post('/predict')
-def prediction(temperature, luminosity, radius, abs_mag):
-    input_features = [[temperature, luminosity, radius, abs_mag]]
+@app.post('/predict', response_model=StarTypePrediction)
+# def prediction(temperature, luminosity, radius, abs_mag):
+def prediction(sp: StarProperties):
+    input_features = [[sp.temperature, sp.luminosity, sp.radius, sp.abs_mag]]
     predicted_class, probabs, classes = make_predictions(model, input_features)
     return {
         'predicted_probabilities' : dict(zip(classes, probabs)),
