@@ -1,4 +1,6 @@
 import pickle
+import warnings
+warnings.filterwarnings('ignore')
 
 # Load the trained model
 def load_model(model_path):
