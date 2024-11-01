@@ -18,7 +18,7 @@ pred_prob_example = {
 class StarTypePrediction(BaseModel):
     predicted_probabilities: dict = Field(description="Predicted Probabilities for all classes.",
     example=pred_prob_example)
-    predicted_class: dict = Field(description="Predicted class based on the highest probability.",
+    predicted_class: str = Field(description="Predicted class based on the highest probability.",
     example='Brown Dwarf')
     confidence_score: str = Field(description="Confidence score indicating the model's certainity in the predicted class.", 
     example="65.9%")
